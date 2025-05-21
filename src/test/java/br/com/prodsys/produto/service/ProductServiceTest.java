@@ -50,7 +50,7 @@ public class ProductServiceTest {
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
-        product = new Product(1L, "Produto 1", "Descrição 1", 10.0, 100);
+        product = new Product(1L, "Shampoo Clear Man", "Anti-Caspa", 10.0, 100);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ProductServiceTest {
 
         Page<Product> result = productService.findAll(pageable);
         assertEquals(1, result.getTotalElements());
-        assertEquals("Produto 1", result.getContent().getFirst().getName());
+        assertEquals("Shampoo Clear Man", result.getContent().getFirst().getName());
         assertNotNull(result.getContent());
         assertFalse(result.getContent().isEmpty());
 
@@ -85,7 +85,7 @@ public class ProductServiceTest {
 
         Product result = productService.save(product);
 
-        assertEquals("Produto 1", result.getName());
+        assertEquals("Shampoo Clear Man", result.getName());
         assertNotNull(result);
         assertFalse(result.getName().isEmpty());
         assertEquals(100, result.getAmount());
@@ -103,7 +103,7 @@ public class ProductServiceTest {
 
         Product result = productService.update(product);
 
-        assertEquals("Produto 1", result.getName());
+        assertEquals("Shampoo Clear Man", result.getName());
         assertNotNull(result);
         assertTrue(result.getPrice() > 0);
         assertEquals(1L, result.getId());
@@ -119,13 +119,11 @@ public class ProductServiceTest {
     void delete() {
         doNothing().when(productIRepository).delete(product);
 
-        productService.delete(product);
-
-        assertNull(null);
         assertDoesNotThrow(() -> productService.delete(product));
 
         verify(productIRepository, times(1)).delete(product);
     }
+
 
     /**
      * Método executado após cada teste para fechar os mocks e liberar recursos.
